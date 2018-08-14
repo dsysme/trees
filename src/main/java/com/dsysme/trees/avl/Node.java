@@ -9,6 +9,13 @@ public class Node<T extends Comparable> {
     private Optional<Node<T>> left;
     private Optional<Node<T>> right;
 
+    public Node(T value) {
+        this.value = value;
+        this.left = Optional.empty();
+        this.right = Optional.empty();
+        this.parent = Optional.empty();
+    }
+
     public T getValue() {
         return value;
     }
@@ -54,7 +61,13 @@ public class Node<T extends Comparable> {
     }
 
     public boolean isMyRightChild(Node<T> node) {
-        return (right.isPresent() && left.get() == node);
+        return (right.isPresent() && right.get() == node);
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s %s %s"
+                , getLeft().isPresent() ? "[" + getLeft().get() + "]" : ""
+                , getValue(), getRight().isPresent() ? "[" + getRight().get() + "]": "");
+    }
 }
